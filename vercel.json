@@ -3,13 +3,13 @@
   "routes": [
     {
       "src": "/products",
-      "dest": "/src/functions/productsRoutes.js"
+      "dest": "/src/routes/productsRoutes"
     }
   ],
   "builds": [
     {
-      "src": "src/functions/productsRoutes.js",
+      "src": "app.ts",
       "use": "@vercel/node"
-    }
+    },
   ]
 }
