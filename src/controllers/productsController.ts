@@ -78,8 +78,7 @@ export async function deleteProductHandler(
         .send({ message: "Não há produtos cadastrados!" });
     }
 
-    let { id } = request.query;
-    id = parseInt(id)
+    const { id } = request.query as { id: number };
 
     const deletedProduct = await deleteProduct(id);
     if (!deletedProduct) {
@@ -124,7 +123,7 @@ export async function createProductHandler(
 ) {
   try {
     let sku, nome, valor, descricao;
-    const imagePath = request.query.imagePath;
+    const imagePath = (request.query as { imagePath: string }).imagePath;
 
     if (request.isMultipart()) {
       let i = 0;
@@ -132,16 +131,16 @@ export async function createProductHandler(
         if (part) {
           switch (part.fieldname) {
             case "nome":
-              nome = part.value;
+              nome = part.toString();
               break;
             case "sku":
-              sku = part.value;
+              sku = part.toString();
               break;
             case "valor":
-              valor = Number(part.value);
+              valor = Number(part.toString());
               break;
             case "descricao":
-              descricao = part.value;
+              descricao = part.toString();
               break;
             default:
               break;

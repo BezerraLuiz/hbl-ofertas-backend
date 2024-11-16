@@ -5,7 +5,6 @@ import { generateImagePath } from '../utils/imagePath';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Defina __dirname para módulos ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
