@@ -5,18 +5,18 @@ import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-import { authenticate } from "../middlewares/authenticateMiddleware";
-import { usuariosRoutes } from "../routes/userRoutes";
-import { productsRoutes } from "../routes/productsRoutes";
-import imageRoutes from "../routes/imageRoutes";
+import { authenticate } from "../src/middlewares/authenticateMiddleware";
+import { usuariosRoutes } from "../src/routes/userRoutes";
+import { productsRoutes } from "../src/routes/productsRoutes";
+import imageRoutes from "../src/routes/imageRoutes";
 
 dotenv.config();
 
 export const server = fastify({ logger: true });
 
 server.register(cors, {
-  origin: "*", // Permite todas as origens
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"], // Permite todos os métodos
+  origin: "https://hbl-ofertas-frontend.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"],
   allowedHeaders: [
     "Content-Type", 
     "Authorization", 
@@ -24,10 +24,10 @@ server.register(cors, {
     "Accept", 
     "Origin", 
     "X-Custom-Header", 
-    "multipart/form-data" // Garantir que o multipart/form-data seja aceito
+    "multipart/form-data"
   ], 
   exposedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin", "X-Custom-Header"],
-  credentials: true, // Permite o envio de cookies ou credenciais
+  credentials: true,
 });
 
 server.register(fastifyMultipart);
