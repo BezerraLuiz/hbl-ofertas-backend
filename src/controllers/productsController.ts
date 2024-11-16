@@ -98,8 +98,7 @@ export async function updateProductHandler(
   reply: FastifyReply
 ) {
   try {
-    let { id } = request.query;
-    id = parseInt(id)
+    const { id } = request.query as { id: number };
     const { sku, nome, valor, descricao } = bodySchema.parse(request.body);
 
     const updatedProduct = await updateProduct({
