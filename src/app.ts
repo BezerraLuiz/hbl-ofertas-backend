@@ -16,7 +16,7 @@ export const server = fastify({ logger: true });
 
 server.register(cors, {
   origin: "https://hbl-ofertas-frontend.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: [
     "Content-Type", 
     "Authorization", 
