@@ -1,8 +1,14 @@
 {
   "version": 2,
+  "routes": [
+    {
+      "src": "/products",
+      "dest": "/src/functions/productsRoutes.js"
+    }
+  ],
   "builds": [
     {
-      "src": "app.ts",
+      "src": "src/functions/productsRoutes.js",
       "use": "@vercel/node"
     }
   ]
