@@ -15,7 +15,10 @@ dotenv.config();
 export const server = fastify({ logger: true });
 
 server.register(cors, {
-  origin: true,
+  origin: "https://hbl-ofertas-frontend-4mzddlk6y-luiz-bezerras-projects.vercel.app", // Substitua pela URL do seu frontend
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Permite os métodos adequados
+  allowedHeaders: ["Content-Type", "Authorization"], // Defina os cabeçalhos necessários
+  credentials: true, // Caso precise de cookies ou credenciais
 });
 
 server.register(fastifyMultipart);
