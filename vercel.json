@@ -10,6 +10,6 @@
     {
       "src": "app.ts",
       "use": "@vercel/node"
-    },
+    }
   ]
 }
