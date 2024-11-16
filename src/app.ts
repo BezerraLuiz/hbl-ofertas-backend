@@ -2,7 +2,9 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
+import fastifyStatic from "@fastify/static"; // Importando corretamente
 import dotenv from "dotenv";
+import path from "path"; // Importando o módulo path do Node.js
 import { authenticate } from "./middlewares/authenticateMiddleware";
 import { usuariosRoutes } from "./routes/userRoutes";
 import { productsRoutes } from "./routes/productsRoutes";
@@ -27,6 +29,12 @@ authenticate(server);
 server.register(usuariosRoutes);
 server.register(imageRoutes);
 server.register(productsRoutes);
+
+// Configuração para servir arquivos estáticos
+server.register(fastifyStatic, {
+  root: path.join(__dirname, "../uploads"), // Caminho para os arquivos
+  prefix: "/uploads/", // URL pública para acessar os arquivos
+});
 
 server
   .listen({ port: 3333 })

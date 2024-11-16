@@ -3,10 +3,6 @@ import fs from 'fs';
 import { pump } from '../lib/pump';
 import { generateImagePath } from '../utils/imagePath';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export async function uploadImageHandler(request: FastifyRequest, reply: FastifyReply) {
   const data = await request.file();
@@ -24,7 +20,9 @@ export async function uploadImageHandler(request: FastifyRequest, reply: Fastify
 
   const imagePath = generateImagePath(nome, data.filename);
 
-  const fullImagePath = path.join(__dirname, '../../../frontend/public', imagePath);
+  // Caminho onde as imagens serão salvas no backend
+  const uploadDir = path.join(__dirname, '../uploads'); // Ajuste conforme necessário
+  const fullImagePath = path.join(uploadDir, imagePath);
 
   const dir = path.dirname(fullImagePath);
   if (!fs.existsSync(dir)) {
@@ -33,5 +31,8 @@ export async function uploadImageHandler(request: FastifyRequest, reply: Fastify
 
   await pump(data.file, fs.createWriteStream(fullImagePath));
 
-  return { imagePath };
+  // URL pública para acessar a imagem
+  const publicImageUrl = `https://seu-backend.com/uploads/${imagePath}`; // Atualize com o domínio do backend
+
+  return { imageUrl: publicImageUrl };
 }
