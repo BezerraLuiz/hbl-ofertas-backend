@@ -2,9 +2,9 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
-import fastifyStatic from "@fastify/static"; // Importando corretamente
+import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
-import path from "path"; // Importando o módulo path do Node.js
+import path from "path";
 import { authenticate } from "./middlewares/authenticateMiddleware";
 import { usuariosRoutes } from "./routes/userRoutes";
 import { productsRoutes } from "./routes/productsRoutes";
@@ -30,16 +30,19 @@ server.register(usuariosRoutes);
 server.register(imageRoutes);
 server.register(productsRoutes);
 
-// Configuração para servir arquivos estáticos
 server.register(fastifyStatic, {
-  root: path.join(__dirname, "../uploads"), // Caminho para os arquivos
-  prefix: "/uploads/", // URL pública para acessar os arquivos
+  root: path.join(__dirname, "../uploads"),
+  prefix: "/uploads/",
 });
 
+const port = parseInt(process.env.PORT || "3333", 10);
+
 server
-  .listen({ port: 3333 })
+  .listen({ port })
   .then(() => {
-    console.log("🚀 HTTP server running on http://localhost:3333");
+    console.log(
+      `🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`
+    );
   })
   .catch((err) => {
     console.error(err);
