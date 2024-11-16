@@ -16,7 +16,7 @@ export const server = fastify({ logger: true });
 
 server.register(cors, {
   origin: "https://hbl-ofertas-frontend.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: [
     "Content-Type", 
     "Authorization", 
@@ -26,8 +26,9 @@ server.register(cors, {
     "X-Custom-Header", 
     "multipart/form-data"
   ], 
-  exposedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin", "X-Custom-Header"],
+  exposedHeaders: ["Content-Type", "Authorization", "multipart/form-data"],
   credentials: true,
+  preflight: true,
 });
 
 server.register(fastifyMultipart);
