@@ -8,7 +8,7 @@
   ],
   "builds": [
     {
-      "src": "app.ts",
+      "src": "src/app.ts",
       "use": "@vercel/node"
     }
   ]
