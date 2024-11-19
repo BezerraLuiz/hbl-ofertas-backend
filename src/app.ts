@@ -39,7 +39,7 @@ server.register(fastifyStatic, {
 
 //teste da rota
 server.get("/", async () => {
-  return { message: "Rota Funcionando!" };
+  return console.log("Rota Funcionando!");
 });
 
 const port = parseInt(process.env.PORT || "3333", 10);
