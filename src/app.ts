@@ -37,6 +37,11 @@ server.register(fastifyStatic, {
   prefix: "/uploads/",
 });
 
+//teste da rota
+server.get("/", async () => {
+  return { message: "Rota Funcionando!" };
+});
+
 const port = parseInt(process.env.PORT || "3333", 10);
 
 server
