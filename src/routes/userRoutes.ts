@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
-import { loginHandler } from "../controllers/usersController";
+import { loginHandler } from "../controllers/usersController.js";
 
 export default async function usuariosRoutes(server: FastifyInstance) {
   server.post("/usuarios", loginHandler);

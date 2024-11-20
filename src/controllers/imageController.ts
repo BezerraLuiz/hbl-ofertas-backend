@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import fs from 'fs';
-import { pump } from '../lib/pump';
-import { generateImagePath } from '../utils/imagePath';
+import { pump } from '../lib/pump.js';
+import { generateImagePath } from '../utils/imagePath.js';
 import path from 'path';
 
 export async function uploadImageHandler(request: FastifyRequest, reply: FastifyReply) {

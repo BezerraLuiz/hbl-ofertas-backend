@@ -4,10 +4,10 @@ import {
   deleteProduct,
   getAllProducts,
   updateProduct,
-} from "../services/productsService";
-import { bodySchema } from "../schemas/productsSchema";
-import { getProductBySku } from "../services/productsService";
-import { productInterface } from "../interfaces/productInterface";
+} from "../services/productsService.js";
+import { bodySchema } from "../schemas/productsSchema.js";
+import { getProductBySku } from "../services/productsService.js";
+import { productInterface } from "../interfaces/productInterface.js";
 
 export async function getAllProductsHandler(
   request: FastifyRequest,

@@ -1,12 +1,12 @@
-import { prisma } from "../lib/prisma";
-import { GetAllProductsResponseDtos } from "../dtos/produtosDto/getAllProductsDtos";
+import { prisma } from "../lib/prisma.js";
+import { GetAllProductsResponseDtos } from "../dtos/produtosDto/getAllProductsDtos.js";
 import {
   GetProductBySkuRequestDto,
   GetProductBySkuResponseDto,
 } from "../dtos/produtosDto/getProductBySkuDtos";
-import { DeleteProductRequestDto } from "../dtos/produtosDto/deleteProductDtos";
-import { updateProductRequestDto } from "../dtos/produtosDto/updateProductDtos";
-import { createProductRequestDto } from "../dtos/produtosDto/createProductDtos";
+import { DeleteProductRequestDto } from "../dtos/produtosDto/deleteProductDtos.js";
+import { updateProductRequestDto } from "../dtos/produtosDto/updateProductDtos.js";
+import { createProductRequestDto } from "../dtos/produtosDto/createProductDtos.js";
 
 export async function getAllProducts(): Promise<GetAllProductsResponseDtos> {
   return prisma.produtos.findMany({ orderBy: { nome: "asc" } });

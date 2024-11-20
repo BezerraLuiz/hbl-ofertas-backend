@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { findUserByEmail, verifyPassword } from "../services/userService";
-import { generateToken } from "../utils/jwtUtils";
+import { findUserByEmail, verifyPassword } from "../services/userService.js";
+import { generateToken } from "../utils/jwtUtils.js";
 
 export async function loginHandler(request: FastifyRequest, reply: FastifyReply) {
   const bodySchema = z.object({

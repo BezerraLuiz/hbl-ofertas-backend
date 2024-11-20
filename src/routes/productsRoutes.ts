@@ -5,7 +5,7 @@ import {
     deleteProductHandler,
     updateProductHandler,
     createProductHandler,
-} from "../controllers/productsController";
+} from "../controllers/productsController.js";
 
 export default async function productsRoutes(server: FastifyInstance) {
     server.get("/products", getAllProductsHandler);

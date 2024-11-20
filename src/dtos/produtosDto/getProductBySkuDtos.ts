@@ -1,4 +1,4 @@
-import {productInterface} from "../../interfaces/productInterface";
+import { productInterface } from "../../interfaces/productInterface.js";
 
 export type GetProductBySkuRequestDto = productInterface["sku"];
 
