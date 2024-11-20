@@ -2,9 +2,7 @@ import fastify, { FastifyInstance } from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
-import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
-import path from "path";
 import authenticate from "./middlewares/authenticateMiddleware.js";
 import usuariosRoutes from "./routes/userRoutes.js";
 import productsRoutes from "./routes/productsRoutes.js";
@@ -40,13 +38,6 @@ export default function buildServer(): FastifyInstance {
   server.register(usuariosRoutes);
   server.register(imageRoutes);
   server.register(productsRoutes);
-
-  const __dirname = path.dirname(new URL(import.meta.url).pathname);
-
-  server.register(fastifyStatic, {
-    root: path.join(__dirname, "../uploads"),
-    prefix: "/uploads/",
-  });
 
   const port = parseInt(process.env.PORT || "3333", 10);
 
