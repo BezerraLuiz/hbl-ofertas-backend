@@ -1,13 +1,13 @@
-import fastify, { FastifyReply, FastifyRequest } from "fastify";
+import fastify from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-// import { authenticate } from "./middlewares/authenticateMiddleware";
-import { usuariosRoutes } from "./routes/userRoutes";
-import { productsRoutes } from "./routes/productsRoutes";
+import authenticate from "./middlewares/authenticateMiddleware";
+import usuariosRoutes from "./routes/userRoutes";
+import productsRoutes from "./routes/productsRoutes";
 import imageRoutes from "./routes/imageRoutes";
 
 dotenv.config();
@@ -35,17 +35,7 @@ server.register(fastifyJwt, {
 });
 
 // Chamada do middleware de autenticação
-server.decorate(
-  "authenticate",
-  async (request: FastifyRequest, reply: FastifyReply) => {
-    try {
-      await request.jwtVerify();
-    } catch (err) {
-      console.log(err);
-      reply.status(401).send({ error: "Unauthorized" });
-    }
-  }
-);
+authenticate(server);
 
 // Registrar as rotas
 server.register(usuariosRoutes);
@@ -70,9 +60,7 @@ const port = parseInt(process.env.PORT || "3333", 10);
 server
   .listen({ port })
   .then(() => {
-    console.log(
-      `🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`
-    );
+    console.log(`🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`);
   })
   .catch((err) => {
     console.error("Erro ao iniciar o servidor:", err);

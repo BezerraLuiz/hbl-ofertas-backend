@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { loginHandler } from "../controllers/usersController";
 
-export async function usuariosRoutes(server: FastifyInstance) {
+export default async function usuariosRoutes(server: FastifyInstance) {
   server.post("/usuarios", loginHandler);
 
   server.decorate("authenticate", async function (request: FastifyRequest, reply: FastifyReply) {
