@@ -2,8 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/products",
-      "dest": "/src/routes/productsRoutes"
+      "src": "(*)",
+      "dest": "/src/app.ts"
     }
   ],
   "builds": [
