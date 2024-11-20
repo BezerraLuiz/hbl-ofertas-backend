@@ -12,60 +12,64 @@ import imageRoutes from "./routes/imageRoutes";
 
 dotenv.config();
 
-// Logando para verificar se a variável de ambiente foi carregada corretamente
-console.log(`[${new Date().toISOString()}] ✅ Variáveis de ambiente carregadas.`);
-
 export const server = fastify({ logger: true });
 
-console.log(`[${new Date().toISOString()}] 🛠️ Inicializando servidor Fastify...`);
+// Ignorar requisições para favicon.ico e retornar 204 (No Content)
+server.get("/favicon.ico", async (request, reply) => {
+  return reply.status(204).send();
+});
 
+// Configuração do CORS
 server.register(cors, {
   origin: "*",
   credentials: true,
   preflight: true,
 });
-console.log(`[${new Date().toISOString()}] ✅ Plugin CORS registrado com sucesso!`);
 
+// Registro do multipart para upload de arquivos
 server.register(fastifyMultipart);
-console.log(`[${new Date().toISOString()}] ✅ Plugin Multipart registrado com sucesso!`);
 
+// Registro do JWT para autenticação
 server.register(fastifyJwt, {
   secret: process.env.JWT_SECRET as string,
 });
-console.log(`[${new Date().toISOString()}] ✅ Plugin JWT registrado com sucesso!`);
 
-console.log(`[${new Date().toISOString()}] 🔑 Registrando middleware de autenticação...`);
+// Chamada do middleware de autenticação
 authenticate(server);
 
-server.register(fastifyStatic, {
-  root: path.join(__dirname, "../uploads"),
-  prefix: "/uploads/",
-});
-console.log(`[${new Date().toISOString()}] ✅ Plugin de arquivos estáticos registrado com sucesso!`);
-
-console.log(`[${new Date().toISOString()}] 🛣️ Registrando rotas...`);
+// Registrar as rotas
 server.register(usuariosRoutes);
 server.register(imageRoutes);
 server.register(productsRoutes);
 
-server.get("/", async () => {
-  // Logando quando a rota de teste é acessada
-  console.log(`[${new Date().toISOString()}] 🌐 Acessada a rota de teste!`);
-  return { message: "Rota Funcionando!" };
+// Servir arquivos estáticos da pasta uploads
+server.register(fastifyStatic, {
+  root: path.join(__dirname, "../uploads"),
+  prefix: "/uploads/",
 });
 
-const port = parseInt(process.env.PORT || "3333", 10);
+// Rota para teste do servidor
+server.get("/", async () => {
+  console.log("Rota Funcionando!");
+  return { message: "Servidor está funcionando!" };
+});
 
-// Logando quando o servidor está tentando iniciar
-console.log(`[${new Date().toISOString()}] 🚀 Tentando iniciar servidor na porta ${port}...`);
+// Rota para captura de logs de erros ou outras rotas não encontradas
+server.setNotFoundHandler((request, reply) => {
+  if (request.url === "/favicon.ico") {
+    return reply.status(204).send(); // Ignorar solicitação para favicon.ico
+  }
+  reply.status(404).send({ error: "Route not found" });
+});
+
+// Inicializar o servidor
+const port = parseInt(process.env.PORT || "3333", 10);
 
 server
   .listen({ port })
   .then(() => {
-    console.log(
-      `[${new Date().toISOString()}] 🚀 Servidor HTTP iniciado com sucesso em https://hbl-ofertas-backend.vercel.app/`
-    );
+    console.log(`🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`);
   })
   .catch((err) => {
-    console.error(`[${new Date().toISOString()}] ❌ Erro ao iniciar o servidor:`, err);
+    console.error("Erro ao iniciar o servidor:", err);
   });
