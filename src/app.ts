@@ -5,10 +5,10 @@ import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-import { authenticate } from "../src/middlewares/authenticateMiddleware";
-import { usuariosRoutes } from "../src/routes/userRoutes";
-import { productsRoutes } from "../src/routes/productsRoutes";
-import imageRoutes from "../src/routes/imageRoutes";
+import { authenticate } from "./middlewares/authenticateMiddleware";
+import { usuariosRoutes } from "./routes/userRoutes";
+import { productsRoutes } from "./routes/productsRoutes";
+import imageRoutes from "./routes/imageRoutes";
 
 dotenv.config();
 
