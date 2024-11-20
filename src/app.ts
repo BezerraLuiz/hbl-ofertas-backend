@@ -37,7 +37,7 @@ server.register(fastifyStatic, {
   prefix: "/uploads/",
 });
 
-//teste da rota
+// Rota para teste do server.
 server.get("/", async () => {
   return console.log("Rota Funcionando!");
 });
