@@ -36,8 +36,8 @@ export default function buildServer() {
     prefix: "/uploads/",
   });
 
-  server.get("/", async () => {
-    return { message: "Servidor está funcionando!" };
+  server.get("/", async (request, reply) => {
+    return reply.status(200).send(console.log("Tudo Funcionando!"));
   });
 
   return server;
