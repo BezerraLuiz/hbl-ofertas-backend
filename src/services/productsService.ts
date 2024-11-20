@@ -3,7 +3,7 @@ import { GetAllProductsResponseDtos } from "../dtos/produtosDto/getAllProductsDt
 import {
   GetProductBySkuRequestDto,
   GetProductBySkuResponseDto,
-} from "../dtos/produtosDto/getProductBySkuDtos";
+} from "../dtos/produtosDto/getProductBySkuDtos.js";
 import { DeleteProductRequestDto } from "../dtos/produtosDto/deleteProductDtos.js";
 import { updateProductRequestDto } from "../dtos/produtosDto/updateProductDtos.js";
 import { createProductRequestDto } from "../dtos/produtosDto/createProductDtos.js";

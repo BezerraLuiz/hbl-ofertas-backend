@@ -14,10 +14,10 @@ dotenv.config();
 
 export const server = fastify({ logger: true });
 
-// Ignorar requisições para favicon.ico e retornar 204 (No Content)
-server.get("/favicon.ico", async (request, reply) => {
-  return reply.status(204).send();
-});
+// // Ignorar requisições para favicon.ico e retornar 204 (No Content)
+// server.get("/favicon.ico", async (request, reply) => {
+//   return reply.status(204).send();
+// });
 
 // Configuração do CORS
 server.register(cors, {

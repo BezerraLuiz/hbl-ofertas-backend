@@ -4,13 +4,13 @@
     {
       "src": "src/app.ts",
       "use": "@vercel/node"
-    },
-    {
-      "env": {
-        "PRISMA_GENERATE": "true"
-      }
     }
   ],
+  "build": {
+    "env": {
+      "PRISMA_GENERATE": "true"
+    }
+  },
   "routes": [
     {
       "src": "(.*)",
