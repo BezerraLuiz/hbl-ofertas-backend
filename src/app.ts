@@ -1,11 +1,11 @@
-import fastify from "fastify";
+import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-import { authenticate } from "./middlewares/authenticateMiddleware";
+// import { authenticate } from "./middlewares/authenticateMiddleware";
 import { usuariosRoutes } from "./routes/userRoutes";
 import { productsRoutes } from "./routes/productsRoutes";
 import imageRoutes from "./routes/imageRoutes";
@@ -35,7 +35,17 @@ server.register(fastifyJwt, {
 });
 
 // Chamada do middleware de autenticação
-authenticate(server);
+server.decorate(
+  "authenticate",
+  async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      await request.jwtVerify();
+    } catch (err) {
+      console.log(err);
+      reply.status(401).send({ error: "Unauthorized" });
+    }
+  }
+);
 
 // Registrar as rotas
 server.register(usuariosRoutes);
@@ -54,21 +64,15 @@ server.get("/", async () => {
   return { message: "Servidor está funcionando!" };
 });
 
-// Rota para captura de logs de erros ou outras rotas não encontradas
-server.setNotFoundHandler((request, reply) => {
-  if (request.url === "/favicon.ico") {
-    return reply.status(204).send(); // Ignorar solicitação para favicon.ico
-  }
-  reply.status(404).send({ error: "Route not found" });
-});
-
 // Inicializar o servidor
 const port = parseInt(process.env.PORT || "3333", 10);
 
 server
   .listen({ port })
   .then(() => {
-    console.log(`🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`);
+    console.log(
+      `🚀 HTTP server running on https://hbl-ofertas-backend.vercel.app/`
+    );
   })
   .catch((err) => {
     console.error("Erro ao iniciar o servidor:", err);
