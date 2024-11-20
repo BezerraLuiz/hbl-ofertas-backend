@@ -5,7 +5,7 @@ import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-import { authenticate } from "./middlewares/authenticateMiddleware";
+import { authenticate } from "./middlewares/AuthenticateMiddleware";
 import { usuariosRoutes } from "./routes/userRoutes";
 import { productsRoutes } from "./routes/productsRoutes";
 import imageRoutes from "./routes/imageRoutes";
