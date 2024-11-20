@@ -43,6 +43,9 @@ server.register(imageRoutes);
 server.register(productsRoutes);
 
 // Servir arquivos estáticos da pasta uploads
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+// Registrando o diretório de uploads
 server.register(fastifyStatic, {
   root: path.join(__dirname, "../uploads"),
   prefix: "/uploads/",
