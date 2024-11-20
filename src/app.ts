@@ -1,19 +1,27 @@
-import fastify from "fastify";
+import fastify, { FastifyInstance } from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
 import dotenv from "dotenv";
 import path from "path";
-import authenticate from "./middlewares/authenticateMiddleware.js";
-import usuariosRoutes from "./routes/userRoutes.js";
-import productsRoutes from "./routes/productsRoutes.js";
-import imageRoutes from "./routes/imageRoutes.js";
+import authenticate from "./middlewares/authenticateMiddleware";
+import usuariosRoutes from "./routes/userRoutes";
+import productsRoutes from "./routes/productsRoutes";
+import imageRoutes from "./routes/imageRoutes";
 
 dotenv.config();
 
-export default function buildServer() {
-  const server = fastify({ logger: true });
+function validateEnvVariables(): void {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not defined in the environment variables.");
+  }
+}
+
+validateEnvVariables();
+
+export default function buildServer(): FastifyInstance {
+  const server: FastifyInstance = fastify({ logger: true });
 
   server.register(cors, {
     origin: "*",
@@ -22,7 +30,11 @@ export default function buildServer() {
   });
 
   server.register(fastifyMultipart);
-  server.register(fastifyJwt, { secret: process.env.JWT_SECRET as string });
+
+  server.register(fastifyJwt, {
+    secret: process.env.JWT_SECRET as string,
+  });
+
   authenticate(server);
 
   server.register(usuariosRoutes);
@@ -36,9 +48,23 @@ export default function buildServer() {
     prefix: "/uploads/",
   });
 
-  server.get("/", async (request, reply) => {
-    return reply.status(200).send(console.log("Tudo Funcionando!"));
+  const port = parseInt(process.env.PORT || "3333", 10);
+
+  server.get("/", async (_request, reply) => {
+    return reply.status(200).send({ message: "Tudo Funcionando!" });
   });
+
+  const startServer = async () => {
+    try {
+      await server.listen({ port, host: "0.0.0.0" });
+      console.log(`🚀 Server is running on port ${port}`);
+    } catch (error) {
+      server.log.error(error);
+      process.exit(1);
+    }
+  };
+
+  startServer();
 
   return server;
 }
