@@ -15,10 +15,6 @@ dotenv.config();
 export default function buildServer() {
   const server = fastify({ logger: true });
 
-  server.get("/favicon.ico", async (request, reply) => {
-    return reply.status(204).send();
-  });
-
   server.register(cors, {
     origin: "*",
     credentials: true,
