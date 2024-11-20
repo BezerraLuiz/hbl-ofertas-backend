@@ -3,12 +3,7 @@
   "builds": [
     {
       "src": "src/app.ts",
-      "use": "@vercel/node",
-      "config": {
-        "env": {
-          "PRISMA_GENERATE": "true"
-        }
-      }
+      "use": "@vercel/node"
     }
   ],
   "build": {
@@ -21,10 +16,5 @@
       "src": "(.*)",
       "dest": "src/app.ts"
     }
-  ],
-  "functions": {
-    "api/**/*": {
-      "maxDuration": 20
-    }
-  }
+  ]
 }
