@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/app.js",
     "dev": "tsx watch src/app.ts",
-    "crypto": "tsx scripts/encrypt-passwords.ts"
+    "crypto": "tsx scripts/encrypt-passwords.ts",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
