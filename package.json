@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Mostrar 50 ofertas da loja, onde o cliente pode acessar o site de vendas e ter acesso as redes sociais.\r O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma página separada.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "dev": "tsx watch src/Server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^22.9.3",
     "eslint": "^9.15.0",
     "globals": "^15.12.0",
@@ -23,6 +26,7 @@
   "dependencies": {
     "@fastify/cors": "^10.0.1",
     "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
     "decimal.js": "^10.4.3",
     "fastify": "^5.1.0",
     "zod": "^3.23.8"

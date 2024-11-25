@@ -23,6 +23,7 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npx prisma init 
   - npm i decimal.js
   - npm i zod
+  - npm i bcrypt
 
 ## Diagrama Das Rotas
   ![alt text](diagram.png)
