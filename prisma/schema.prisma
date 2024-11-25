@@ -12,3 +12,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id       String @id @default(uuid())
+  name     String
+  mail     String
+  password String
+}
+
+model Products {
+  id          String   @id @default(uuid())
+  sku         String   @unique
+  name        String
+  price       Decimal  @db.Decimal(10, 2)
+  description String
+  createdAt   DateTime @default(now())
+}

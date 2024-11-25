@@ -17,10 +17,12 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npm i -D typescript @types/node tsx tsup
   - npx tsc --init
   - npm i fastify
+  - npm i @fastify/cors
   - npm i prisma -D
   - npm i @prisma/client
   - npx prisma init 
-
+  - npm i decimal.js
+  - npm i zod
 
 ## Diagrama Das Rotas
-  ![alt text](image.png)
+  ![alt text](diagram.png)
