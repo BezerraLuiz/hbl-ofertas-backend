@@ -12,7 +12,7 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - PostgreSQL (Neon Console)
   - Typescript
 
-## Dependências para instalar
+## Dependências Para Instalar
   - npm init
   - npm i -D typescript @types/node tsx tsup
   - npx tsc --init
@@ -20,3 +20,7 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npm i prisma -D
   - npm i @prisma/client
   - npx prisma init 
+
+
+## Diagrama Das Rotas
+  ![alt text](image.png)
