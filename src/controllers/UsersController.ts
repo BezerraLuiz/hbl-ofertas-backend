@@ -1,11 +1,11 @@
-import { findUserByMail, createUser } from "../services/UserServices"; 
-import { bodySchemaUser } from "../schemas/UserSchemas";
+import { findUserByMail, createUser } from "../services/UsersServices"; 
+import { bodySchemaUser } from "../schemas/UsersSchemas";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { encryptPassword } from "../utils/EncryptPassword";
 import { verifyPasswordEqual, verifyPasswordSecurity } from "../utils/VerifyPassword";
 import { generateToken } from "../utils/GenerateToken";
 
-export async function createUserHandler(req: FastifyRequest, reply: FastifyReply) {
+export async function createUserHandler(req: FastifyRequest, reply: FastifyReply): Promise<object> {
   const { mail, password } = bodySchemaUser.parse(req.body) as { mail: string, password: string };
 
   const passSecurity = await verifyPasswordSecurity(password);
@@ -21,7 +21,7 @@ export async function createUserHandler(req: FastifyRequest, reply: FastifyReply
   return reply.status(201).send({ error: false }); 
 }
 
-export async function verifyCredetials(req: FastifyRequest, reply: FastifyReply) {
+export async function verifyCredetials(req: FastifyRequest, reply: FastifyReply): Promise<object> {
   const { mail, password } = bodySchemaUser.parse(req.body) as { mail: string, password: string }; 
 
   const passworddb: string = await findUserByMail(mail);
