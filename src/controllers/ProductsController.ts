@@ -19,6 +19,8 @@ export async function getProductBySkuHandler(req: FastifyRequest, reply: Fastify
 
   const product = await getProductBySku(sku);
 
+  if (!product) reply.status(404).send({ error: true, message: "Product not found!" });
+
   return reply.status(200).send({ error: false, product });
 }
 
