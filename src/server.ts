@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
-import { userRoutes } from "./routes/UserRoutes";
+import { usersRoutes } from "./routes/UsersRoutes";
 
 export const server = fastify();
 
@@ -16,7 +16,7 @@ server.register(fastifyJwt, {
 });
 
 // Routes:
-server.register(userRoutes);
+server.register(usersRoutes);
 
 server
   .listen({

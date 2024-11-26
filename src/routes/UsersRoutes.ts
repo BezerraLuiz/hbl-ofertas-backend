@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { createUserHandler, verifyCredetials } from "../controllers/UserController";
+import { createUserHandler, verifyCredetials } from "../controllers/UsersController";
 
-export async function userRoutes(server: FastifyInstance) {
+export async function usersRoutes(server: FastifyInstance) {
   server.post("/users/create", createUserHandler);
   server.post("/users", verifyCredetials);
 
