@@ -1,15 +1,15 @@
-import { FastifyInstance, FastifyRequest } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { createUserHandler, verifyCredetials } from "../controllers/UserController";
 
 export async function userRoutes(server: FastifyInstance) {
   server.post("/users/create", createUserHandler);
   server.post("/users", verifyCredetials);
 
-  server.decorate("authenticate", async function (request: FastifyRequest) {
+  server.decorate("authenticate", async function (request: FastifyRequest, reply: FastifyReply) {
     try {
       await request.jwtVerify();
     } catch (e) {
-      throw new Error("Token inválido ou ausente " + e);
+      return reply.status(500).send({ error: true, message: "Token invalid or missing! Error: " + e});
     }
   });
 
