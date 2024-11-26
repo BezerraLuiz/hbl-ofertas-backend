@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const bodySchemaUser = z.object({
+export const bodySchemaUsers = z.object({
   mail: z.string(),
   password: z.string(),
 });

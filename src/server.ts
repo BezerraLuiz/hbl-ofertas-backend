@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import { usersRoutes } from "./routes/UsersRoutes";
+import { productsRoutes } from "./routes/ProductsRoutes";
 
 export const server = fastify();
 
@@ -17,6 +18,7 @@ server.register(fastifyJwt, {
 
 // Routes:
 server.register(usersRoutes);
+server.register(productsRoutes);
 
 server
   .listen({
