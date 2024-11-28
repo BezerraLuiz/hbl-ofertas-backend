@@ -37,3 +37,15 @@ export async function getProductBySku(sku: string): Promise<object> {
 export async function deleteProduct(sku: string): Promise<object> {
   return prisma.products.delete({ where: { sku } });
 }
+
+export async function createProduct(sku: string, name: string, price: number, description: string, imagePath: string) {
+  return prisma.products.create({
+    data: {
+      sku,
+      name,
+      price,
+      description,
+      imagePath
+    }
+  });
+}
