@@ -3,7 +3,7 @@ import { google } from "googleapis";
 
 const google_api_folder_id = "1Tw4PYvrXK91kFxV1_j_BU4OOUj-VLb51";
 
-async function uploadFile() {
+export async function uploadFile(nameArchive, typeArchive, arquivo) {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: "./google-drive.json",
@@ -16,13 +16,13 @@ async function uploadFile() {
     });
 
     const fileMetaData = {
-      name: "image.jpg",
+      name: nameArchive,
       parents: [google_api_folder_id],
     };
 
     const media = {
-      mimeType: "image/jpeg",
-      body: fs.createReadStream("./snow.jpg"),
+      mimeType: typeArchive,
+      body: fs.createReadStream(arquivo),
     };
 
     const response = await driveService.files.create({

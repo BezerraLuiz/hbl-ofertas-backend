@@ -19,6 +19,7 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npm i fastify
   - npm i @fastify/cors
   - npm i @fastify/jwt
+  - npm i @fastify/multipart
   - npm i prisma -D
   - npm i @prisma/client
   - npx prisma init 

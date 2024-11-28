@@ -5,7 +5,7 @@ import { prisma } from "../lib/Prisma";
  * Get all products ✔️
  * Get product by sku ✔️
  * Delete Product ✔️
- * Create Product
+ * Create Product ...
  * Update Product
  */
 
