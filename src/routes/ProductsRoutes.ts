@@ -1,4 +1,4 @@
-import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductBySkuHandler } from "../controllers/ProductsController";
+import { createProductHandler, deleteProductHandler, getAllProductsHandler, getProductBySkuHandler, UpdateProductHandler } from "../controllers/ProductsController";
 import { server } from "../Server";
 
 export async function productsRoutes() {
@@ -6,4 +6,5 @@ export async function productsRoutes() {
   server.get("/products:sku", getProductBySkuHandler);
   server.delete("/products/delete:sku", deleteProductHandler);
   server.post("/products", createProductHandler);
+  server.put("/products/update", UpdateProductHandler);
 }

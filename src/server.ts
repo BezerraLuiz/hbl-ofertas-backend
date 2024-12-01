@@ -5,6 +5,12 @@ import cors from "@fastify/cors";
 import { usersRoutes } from "./routes/UsersRoutes";
 import { productsRoutes } from "./routes/ProductsRoutes";
 import { imagesRoutes } from "./routes/ImagesRoutes";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+// Api Google Drive.
+export const google_api_folder_id: string = process.env.GOOGLE_API_FOLDER_ID!;
 
 export const server = fastify();
 
@@ -15,7 +21,7 @@ server.register(cors, {
 
 server.register(fastifyMultipart);
 
-// JWT
+// JWT.
 server.register(fastifyJwt, {
   secret: process.env.JWT_SECRET as string
 });

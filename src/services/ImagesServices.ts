@@ -1,9 +1,10 @@
-import fs from "fs";
+import { MultipartFile } from "@fastify/multipart";
 import { google } from "googleapis";
+import { google_api_folder_id } from "../Server";
 
-const google_api_folder_id = "1Tw4PYvrXK91kFxV1_j_BU4OOUj-VLb51";
+// https://drive.google.com/uc?export=view&id= + Id da imagem salvada para concatenar e ter uma imagem estática
 
-export async function uploadFile(nameArchive, typeArchive, arquivo) {
+export async function uploadFile(nameArchive: string, typeArchive: string, arquivo: MultipartFile): Promise<string | null | undefined> {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: "./google-drive.json",
@@ -22,7 +23,7 @@ export async function uploadFile(nameArchive, typeArchive, arquivo) {
 
     const media = {
       mimeType: typeArchive,
-      body: fs.createReadStream(arquivo),
+      body: arquivo.file,
     };
 
     const response = await driveService.files.create({
@@ -36,12 +37,3 @@ export async function uploadFile(nameArchive, typeArchive, arquivo) {
     console.error("Upload file error: ", e);
   }
 }
-
-uploadFile().then((fileId) => {
-  if (fileId) {
-    console.log("File uploaded successfully! File ID:", fileId);
-    // https://drive.google.com/uc?export=view&id= + Id da imagem salvada para concatenar e ter uma imagem estática
-  } else {
-    console.log("Failed to upload file.");
-  }
-});

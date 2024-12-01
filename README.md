@@ -27,6 +27,7 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npm i zod
   - npm i bcrypt
   - npm i googleapis@latest
+  - npm i dotenv
 
 ## Diagrama Das Rotas
   ![alt text](diagram.png)
