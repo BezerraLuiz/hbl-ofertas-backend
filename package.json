@@ -4,9 +4,13 @@
   "description": "Mostrar 50 ofertas da loja, onde o cliente pode acessar o site de vendas e ter acesso as redes sociais.\r O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma página separada.",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "dev": "tsx watch src/Server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src"
   },
   "keywords": [],
   "author": "",
