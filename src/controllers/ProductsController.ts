@@ -100,11 +100,6 @@ export async function createProductHandler(
         imageId: string;
       };
 
-    const existProcut = await getProductBySku(sku);
-
-    if (existProcut)
-      return reply.status(400).send({ error: true, message: "Product Exist!" });
-
     const product = await createProduct(
       sku,
       name,

@@ -25,8 +25,8 @@ export async function getAllProducts(): Promise<object> {
   });
 }
 
-export async function getProductBySku(sku: string): Promise<object | null> {
-  return prisma.products.findUnique({ where: { sku } });
+export async function getProductBySku(sku: string): Promise<object> {
+  return prisma.products.findUniqueOrThrow({ where: { sku } });
 }
 
 export async function deleteProduct(sku: string): Promise<object> {
