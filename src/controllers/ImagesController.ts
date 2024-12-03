@@ -14,7 +14,7 @@ export async function uploadImage(
 
     const imageId = await uploadFile(data?.filename, data?.mimetype, data);
 
-    return reply.status(201).send({ error: false, imageId });
+    return reply.status(201).send({ error: false, id: imageId });
   } catch (e) {
     return reply
       .status(505)

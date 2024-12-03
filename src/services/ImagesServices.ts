@@ -1,5 +1,6 @@
 import { MultipartFile } from "@fastify/multipart";
 import { google } from "googleapis";
+import { google_api_folder_id } from "../Server";
 
 // https://drive.google.com/uc?export=view&id= + Id da imagem salvada para concatenar e ter uma imagem estática
 
@@ -21,7 +22,7 @@ export async function uploadFile(
 
     const fileMetaData = {
       name: nameArchive,
-      parents: ['1Tw4PYvrXK91kFxV1_j_BU4OOUj-VLb51'],
+      parents: [google_api_folder_id],
     };
 
     const media = {
