@@ -29,5 +29,9 @@ O admin terá acesso ao cadastro dos produtos, edição e exclusão deles em uma
   - npm i googleapis@latest
   - npm i dotenv
 
+## Rodar o código
+  - npm run build (Se a pasta dist não estiver criada)
+  - node dist/Server.cjs
+
 ## Diagrama Das Rotas
   ![alt text](diagram.png)
