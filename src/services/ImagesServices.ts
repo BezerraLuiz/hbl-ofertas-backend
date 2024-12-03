@@ -4,7 +4,11 @@ import { google_api_folder_id } from "../Server";
 
 // https://drive.google.com/uc?export=view&id= + Id da imagem salvada para concatenar e ter uma imagem estática
 
-export async function uploadFile(nameArchive: string, typeArchive: string, arquivo: MultipartFile): Promise<string | null | undefined> {
+export async function uploadFile(
+  nameArchive: string,
+  typeArchive: string,
+  arquivo: MultipartFile
+): Promise<string | null | undefined> {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: "./google-drive.json",
@@ -33,6 +37,28 @@ export async function uploadFile(nameArchive: string, typeArchive: string, arqui
     });
 
     return response.data.id;
+  } catch (e) {
+    console.error("Upload file error: ", e);
+  }
+}
+
+export async function deleteFile(id: string): Promise<number | undefined> {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: "./google-drive.json",
+      scopes: ["https://www.googleapis.com/auth/drive"],
+    });
+
+    const driveService = google.drive({
+      version: "v3",
+      auth,
+    });
+
+    const response = await driveService.files.delete({
+      fileId: id,
+    });
+
+    return response.status;
   } catch (e) {
     console.error("Upload file error: ", e);
   }

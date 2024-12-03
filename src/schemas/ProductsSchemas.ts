@@ -10,7 +10,7 @@ export const bodySchemaCreateProducts = z.object({
   name: z.string(),
   price: z.number().transform((value) => new Decimal(value)),
   description: z.string(),
-  imagePath: z.string()
+  imageId: z.string()
 });
 
 export const bodySchemaUpdateProducts = z.object({

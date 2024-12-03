@@ -19,6 +19,7 @@ export async function getAllProducts(): Promise<object> {
       name: product.name,
       price: product.price,
       description: product.description,
+      imageId: product.imageId,
       createdAt: product.createdAt
     };
   });
@@ -32,14 +33,14 @@ export async function deleteProduct(sku: string): Promise<object> {
   return prisma.products.delete({ where: { sku } });
 }
 
-export async function createProduct(sku: string, name: string, price: Decimal, description: string, imagePath: string) {
+export async function createProduct(sku: string, name: string, price: Decimal, description: string, imageId: string) {
   return prisma.products.create({
     data: {
       sku,
       name,
       price,
       description,
-      imagePath
+      imageId
     }
   });
 }

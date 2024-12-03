@@ -25,6 +25,6 @@ model Products {
   name        String
   price       Decimal  @db.Decimal(10, 2)
   description String
-  imagePath   String
+  imageId     String
   createdAt   DateTime @default(now())
 }

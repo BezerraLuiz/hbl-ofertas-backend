@@ -91,13 +91,13 @@ export async function createProductHandler(
   reply: FastifyReply
 ): Promise<object> {
   try {
-    const { sku, name, price, description, imagePath } =
+    const { sku, name, price, description, imageId } =
     bodySchemaCreateProducts.parse(req.body) as {
         sku: string;
         name: string;
         price: Decimal;
         description: string;
-        imagePath: string;
+        imageId: string;
       };
 
     const existProcut = await getProductBySku(sku);
@@ -110,7 +110,7 @@ export async function createProductHandler(
       name,
       price,
       description,
-      imagePath
+      imageId
     );
 
     if (!product)
