@@ -1,5 +1,8 @@
 # HBL Ofertas
 
+## URL Produção
+ - https://hbl-ofertas-backend.onrender.com
+
 ## Objetivo
 
 Mostrar 50 ofertas da loja, onde o cliente pode acessar o site de vendas e ter acesso as redes sociais.
