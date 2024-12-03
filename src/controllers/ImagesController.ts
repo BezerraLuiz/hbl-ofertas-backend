@@ -12,9 +12,9 @@ export async function uploadImage(
     if (!data?.filename)
       return reply.status(400).send({ error: true, message: "Unnamed file!" });
 
-    const imagePath = await uploadFile(data?.filename, data?.mimetype, data);
+    const imageId = await uploadFile(data?.filename, data?.mimetype, data);
 
-    return reply.status(201).send({ error: false, imagePath });
+    return reply.status(201).send({ error: false, imageId });
   } catch (e) {
     return reply
       .status(505)
