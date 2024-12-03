@@ -100,13 +100,6 @@ export async function createProductHandler(
         imageId: string;
       };
 
-    if (!imageId || imageId.trim() === "") {
-      return reply.status(400).send({
-        error: true,
-        message: "Invalid imageId provided!",
-      });
-    }
-
     const product = await createProduct(sku, name, price, description, imageId);
 
     if (!product)
