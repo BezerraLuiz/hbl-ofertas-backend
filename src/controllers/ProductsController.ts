@@ -92,7 +92,7 @@ export async function createProductHandler(
 ): Promise<object> {
   try {
     const { sku, name, price, description, imageId } =
-    bodySchemaCreateProducts.parse(req.body) as {
+      bodySchemaCreateProducts.parse(req.body) as {
         sku: string;
         name: string;
         price: Decimal;
@@ -100,13 +100,14 @@ export async function createProductHandler(
         imageId: string;
       };
 
-    const product = await createProduct(
-      sku,
-      name,
-      price,
-      description,
-      imageId
-    );
+    if (!imageId || imageId.trim() === "") {
+      return reply.status(400).send({
+        error: true,
+        message: "Invalid imageId provided!",
+      });
+    }
+
+    const product = await createProduct(sku, name, price, description, imageId);
 
     if (!product)
       return reply
