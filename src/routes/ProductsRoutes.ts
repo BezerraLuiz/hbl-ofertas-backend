@@ -2,8 +2,8 @@ import { createProductHandler, deleteProductHandler, getAllProductsHandler, getP
 import { server } from "../Server";
 
 export async function productsRoutes() {
-  server.get("/products", getAllProductsHandler);
-  server.get("/products/get", getProductBySkuHandler);
+  server.get("/products/all", getAllProductsHandler);
+  server.get("/products", getProductBySkuHandler);
   server.delete("/products/delete", deleteProductHandler);
   server.post("/products", createProductHandler);
   server.put("/products/update", UpdateProductHandler);
