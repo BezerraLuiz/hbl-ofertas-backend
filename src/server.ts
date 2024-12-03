@@ -10,7 +10,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Api Google Drive.
-export const google_api_folder_id: string = process.env.GOOGLE_API_FOLDER_ID as string;
+// export const google_api_folder_id: string = process.env.GOOGLE_API_FOLDER_ID!;
 
 export const server = fastify();
 
