@@ -17,12 +17,12 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/lib/prisma.ts
-var prisma_exports = {};
-__export(prisma_exports, {
+// src/lib/Prisma.ts
+var Prisma_exports = {};
+__export(Prisma_exports, {
   prisma: () => prisma
 });
-module.exports = __toCommonJS(prisma_exports);
+module.exports = __toCommonJS(Prisma_exports);
 var import_client = require("@prisma/client");
 var prisma = new import_client.PrismaClient({
   log: ["query"]

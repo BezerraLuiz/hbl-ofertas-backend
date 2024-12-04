@@ -51,7 +51,7 @@ export async function verifyCredetials(
 
     const passworddb: string = await findUserByMail(mail);
 
-    const credentials = verifyPasswordEqual(password, passworddb);
+    const credentials = await verifyPasswordEqual(password, passworddb);
 
     if (!credentials) {
       return reply

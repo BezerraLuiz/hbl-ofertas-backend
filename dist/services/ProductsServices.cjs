@@ -29,7 +29,7 @@ __export(ProductsServices_exports, {
 });
 module.exports = __toCommonJS(ProductsServices_exports);
 
-// src/lib/prisma.ts
+// src/lib/Prisma.ts
 var import_client = require("@prisma/client");
 var prisma = new import_client.PrismaClient({
   log: ["query"]

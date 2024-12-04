@@ -38,13 +38,13 @@ module.exports = __toCommonJS(ImagesController_exports);
 // src/services/ImagesServices.ts
 var import_googleapis = require("googleapis");
 
-// src/server.ts
+// src/Server.ts
 var import_fastify = __toESM(require("fastify"), 1);
 var import_jwt = __toESM(require("@fastify/jwt"), 1);
 var import_multipart = __toESM(require("@fastify/multipart"), 1);
 var import_cors = __toESM(require("@fastify/cors"), 1);
 
-// src/lib/prisma.ts
+// src/lib/Prisma.ts
 var import_client = require("@prisma/client");
 var prisma = new import_client.PrismaClient({
   log: ["query"]
@@ -92,7 +92,8 @@ async function encryptPassword() {
 // src/utils/VerifyPassword.ts
 var import_bcrypt2 = __toESM(require("bcrypt"), 1);
 async function verifyPasswordEqual(password, hashedPassword) {
-  return import_bcrypt2.default.compare(password, hashedPassword);
+  const validate = await import_bcrypt2.default.compare(password, hashedPassword);
+  return { error: true, validate };
 }
 async function verifyPasswordSecurity(password) {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -140,7 +141,7 @@ async function verifyCredetials(req, reply) {
   try {
     const { mail, password } = bodySchemaUsers.parse(req.body);
     const passworddb = await findUserByMail(mail);
-    const credentials = verifyPasswordEqual(password, passworddb);
+    const credentials = await verifyPasswordEqual(password, passworddb);
     if (!credentials) {
       return reply.status(401).send({ error: true, message: "Incorret Password!" });
     }
@@ -320,7 +321,7 @@ async function imagesRoutes() {
   server.delete("/uploads", deleteImage);
 }
 
-// src/server.ts
+// src/Server.ts
 var dotenv = __toESM(require("dotenv"), 1);
 dotenv.config();
 var google_api_folder_id = process.env.GOOGLE_API_FOLDER_ID;

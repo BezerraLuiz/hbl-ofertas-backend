@@ -35,7 +35,7 @@ __export(EncryptPassword_exports, {
 module.exports = __toCommonJS(EncryptPassword_exports);
 var import_bcrypt = __toESM(require("bcrypt"), 1);
 
-// src/lib/prisma.ts
+// src/lib/Prisma.ts
 var import_client = require("@prisma/client");
 var prisma = new import_client.PrismaClient({
   log: ["query"]
