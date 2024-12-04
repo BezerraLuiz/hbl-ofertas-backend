@@ -5,10 +5,10 @@ interface PasswordSecurityResponse {
   message?: string[]
 }
 
-export async function verifyPasswordEqual(password: string, hashedPassword: string): Promise<object> {
+export async function verifyPasswordEqual(password: string, hashedPassword: string): Promise<boolean> {
   const validate = await bcrypt.compare(password, hashedPassword);
 
-  return { error: true, validate };
+  return validate;
 }
 
 export async function verifyPasswordSecurity(password: string): Promise<PasswordSecurityResponse> {

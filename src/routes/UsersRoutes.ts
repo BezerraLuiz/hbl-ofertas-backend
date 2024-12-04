@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { createUserHandler, verifyCredetials } from "../controllers/UsersController";
+import { createUserHandler, verifyCredentials } from "../controllers/UsersController";
 
 export async function usersRoutes(server: FastifyInstance) {
   server.post("/users/create", createUserHandler);
-  server.post("/users", verifyCredetials);
+  server.post("/users", verifyCredentials);
 
   server.decorate("authenticate", async function (request: FastifyRequest, reply: FastifyReply): Promise<void> {
     try {

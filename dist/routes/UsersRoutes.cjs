@@ -83,7 +83,7 @@ async function encryptPassword() {
 var import_bcrypt2 = __toESM(require("bcrypt"), 1);
 async function verifyPasswordEqual(password, hashedPassword) {
   const validate = await import_bcrypt2.default.compare(password, hashedPassword);
-  return { error: true, validate };
+  return validate;
 }
 async function verifyPasswordSecurity(password) {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -384,13 +384,13 @@ async function createUserHandler(req, reply) {
     return reply.status(505).send({ error: true, message: "Internal Error: " + e });
   }
 }
-async function verifyCredetials(req, reply) {
+async function verifyCredentials(req, reply) {
   try {
     const { mail, password } = bodySchemaUsers.parse(req.body);
     const passworddb = await findUserByMail(mail);
     const credentials = await verifyPasswordEqual(password, passworddb);
     if (!credentials) {
-      return reply.status(401).send({ error: true, message: "Incorret Password!" });
+      return reply.status(401).send({ error: true, message: "Incorrect Password!" });
     }
     const token = generateToken({ mail, password });
     return reply.status(200).send({ error: false, token });
@@ -402,7 +402,7 @@ async function verifyCredetials(req, reply) {
 // src/routes/UsersRoutes.ts
 async function usersRoutes(server2) {
   server2.post("/users/create", createUserHandler);
-  server2.post("/users", verifyCredetials);
+  server2.post("/users", verifyCredentials);
   server2.decorate("authenticate", async function(request, reply) {
     try {
       await request.jwtVerify();

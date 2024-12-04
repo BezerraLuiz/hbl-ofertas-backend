@@ -37,7 +37,7 @@ module.exports = __toCommonJS(VerifyPassword_exports);
 var import_bcrypt = __toESM(require("bcrypt"), 1);
 async function verifyPasswordEqual(password, hashedPassword) {
   const validate = await import_bcrypt.default.compare(password, hashedPassword);
-  return { error: true, validate };
+  return validate;
 }
 async function verifyPasswordSecurity(password) {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
