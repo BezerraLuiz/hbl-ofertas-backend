@@ -34,7 +34,7 @@ __export(ProductsRoutes_exports, {
 });
 module.exports = __toCommonJS(ProductsRoutes_exports);
 
-// src/lib/Prisma.ts
+// src/lib/prisma.ts
 var import_client = require("@prisma/client");
 var prisma = new import_client.PrismaClient({
   log: ["query"]
@@ -173,7 +173,7 @@ async function UpdateProductHandler(req, reply) {
   }
 }
 
-// src/Server.ts
+// src/server.ts
 var import_fastify = __toESM(require("fastify"), 1);
 var import_jwt = __toESM(require("@fastify/jwt"), 1);
 var import_multipart = __toESM(require("@fastify/multipart"), 1);
@@ -189,10 +189,11 @@ async function createUser(mail, password) {
   });
 }
 async function findUserByMail(mail) {
-  return (await prisma.users.findUniqueOrThrow({
+  const user = await prisma.users.findUniqueOrThrow({
     where: { mail },
-    select: { id: false, mail: false, password: true }
-  })).password;
+    select: { password: true }
+  });
+  return user.password;
 }
 
 // src/schemas/UsersSchemas.ts
@@ -385,7 +386,7 @@ async function imagesRoutes() {
   server.delete("/uploads", deleteImage);
 }
 
-// src/Server.ts
+// src/server.ts
 var dotenv = __toESM(require("dotenv"), 1);
 dotenv.config();
 var google_api_folder_id = process.env.GOOGLE_API_FOLDER_ID;
