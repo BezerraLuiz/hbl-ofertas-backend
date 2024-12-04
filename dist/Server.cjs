@@ -276,16 +276,7 @@ async function deleteProductHandler(req, reply) {
 async function createProductHandler(req, reply) {
   try {
     const { sku, name, price, description, imageId } = bodySchemaCreateProducts.parse(req.body);
-    const existProcut = await getProductBySku(sku);
-    if (existProcut)
-      return reply.status(400).send({ error: true, message: "Product Exist!" });
-    const product = await createProduct(
-      sku,
-      name,
-      price,
-      description,
-      imageId
-    );
+    const product = await createProduct(sku, name, price, description, imageId);
     if (!product)
       return reply.status(400).send({ error: true, message: "Error creating the product!" });
     return reply.status(201).send({ error: false, product });
@@ -310,9 +301,9 @@ async function UpdateProductHandler(req, reply) {
 
 // src/routes/ProductsRoutes.ts
 async function productsRoutes() {
-  server.get("/products", getAllProductsHandler);
-  server.get("/products:sku", getProductBySkuHandler);
-  server.delete("/products/delete:sku", deleteProductHandler);
+  server.get("/products/all", getAllProductsHandler);
+  server.get("/products", getProductBySkuHandler);
+  server.delete("/products/delete", deleteProductHandler);
   server.post("/products", createProductHandler);
   server.put("/products/update", UpdateProductHandler);
 }
@@ -378,8 +369,8 @@ async function uploadImage(req, reply) {
     const data = await req.file();
     if (!data?.filename)
       return reply.status(400).send({ error: true, message: "Unnamed file!" });
-    const imagePath = await uploadFile(data?.filename, data?.mimetype, data);
-    return reply.status(201).send({ error: false, imagePath });
+    const imageId = await uploadFile(data?.filename, data?.mimetype, data);
+    return reply.status(201).send({ error: false, id: imageId });
   } catch (e) {
     return reply.status(505).send({ error: true, message: "Internal Error: " + e });
   }

@@ -154,16 +154,7 @@ async function deleteProductHandler(req, reply) {
 async function createProductHandler(req, reply) {
   try {
     const { sku, name, price, description, imageId } = bodySchemaCreateProducts.parse(req.body);
-    const existProcut = await getProductBySku(sku);
-    if (existProcut)
-      return reply.status(400).send({ error: true, message: "Product Exist!" });
-    const product = await createProduct(
-      sku,
-      name,
-      price,
-      description,
-      imageId
-    );
+    const product = await createProduct(sku, name, price, description, imageId);
     if (!product)
       return reply.status(400).send({ error: true, message: "Error creating the product!" });
     return reply.status(201).send({ error: false, product });
