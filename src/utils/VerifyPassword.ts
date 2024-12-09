@@ -1,10 +1,17 @@
 import bcrypt from "bcrypt";
 
-export async function verifyPasswordEqual(password: string, hashedPassword: string) {
-  return bcrypt.compare(password, hashedPassword);
+interface PasswordSecurityResponse {
+  error: boolean,
+  message?: string[]
 }
 
-export async function verifyPasswordSecurity(password: string) {
+export async function verifyPasswordEqual(password: string, hashedPassword: string): Promise<boolean> {
+  const validate = await bcrypt.compare(password, hashedPassword);
+
+  return validate;
+}
+
+export async function verifyPasswordSecurity(password: string): Promise<PasswordSecurityResponse> {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const errors = [];

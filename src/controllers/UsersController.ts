@@ -39,7 +39,7 @@ export async function createUserHandler(
   }
 }
 
-export async function verifyCredetials(
+export async function verifyCredentials(
   req: FastifyRequest,
   reply: FastifyReply
 ): Promise<object> {
@@ -51,12 +51,12 @@ export async function verifyCredetials(
 
     const passworddb: string = await findUserByMail(mail);
 
-    const credentials = verifyPasswordEqual(password, passworddb);
+    const credentials = await verifyPasswordEqual(password, passworddb);
 
     if (!credentials) {
       return reply
         .status(401)
-        .send({ error: true, message: "Incorret Password!" });
+        .send({ error: true, message: "Incorrect Password!" });
     }
 
     const token = generateToken({ mail, password });
