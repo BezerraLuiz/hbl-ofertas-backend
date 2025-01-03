@@ -1,7 +1,6 @@
 -- CreateTable
 CREATE TABLE "Users" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "mail" TEXT NOT NULL,
     "password" TEXT NOT NULL,
 
@@ -15,10 +14,14 @@ CREATE TABLE "Products" (
     "name" TEXT NOT NULL,
     "price" DECIMAL(10,2) NOT NULL,
     "description" TEXT NOT NULL,
+    "imageId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Users_mail_key" ON "Users"("mail");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Products_sku_key" ON "Products"("sku");

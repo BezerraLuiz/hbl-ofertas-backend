@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 import { prisma } from "../lib/Prisma";
 
 export async function encryptPassword() {
@@ -13,3 +13,5 @@ export async function encryptPassword() {
     }
   }
 }
+
+encryptPassword();
